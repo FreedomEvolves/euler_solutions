@@ -1,4 +1,11 @@
+#################
+
 # Problems 1 - 25 from the Project Euler website!
+## Completed problems are hashed out.  Simply unhash them to run the code.
+
+################
+
+
 
 # Euler 1: Find the sum of all multiples of 3 & 5 below 1000
 # Answer: 233168
@@ -129,7 +136,7 @@
 
 
 # Euler 12: What is the value of the first triangle number to have over five hundred divisors?
-# A triangle # is the sum of integers, e.g., the seventh such number is 1+2+3+4+5+6+7 = 28.
+# A triangle number is the sum of integers, e.g., the seventh such number is 1+2+3+4+5+6+7 = 28.
 # Answer: 76576500
 # @divisors = []
 # sum = 1
@@ -269,13 +276,6 @@
 # puts sum
 
 
-# Euler 17: Number letter count: what is the number of letters used to spell out each number between 1 and 1000 inclusive?
-# Answer:
-# string = 'onetwothreefourfivesixseveneightnineteneleventwelvethirteenfourteenfifteensixteenseventeeneightteennineteen'.length
-# puts string
-# string2 = 'onetwothreefourfivesixseveneightnine'.length
-# puts string2
-
 # Euler 20: Sum the digits of 100!
 # Answer: 648
 # @fact = 1
@@ -316,4 +316,4 @@
 
 # fib(2, 3)
 
-
+######## current end of problem set ############
