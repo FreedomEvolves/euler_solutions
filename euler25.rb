@@ -11,7 +11,7 @@
 # Answer: 233168
 sum = 0
 (1..999).each do |i|
-	(i%3 == 0 || i%5 == 0) ? sum = sum + i : sum
+  (i%3 == 0 || i%5 == 0) ? sum = sum + i : sum
 end
 puts sum
 
@@ -23,10 +23,10 @@ puts sum
 # z = 0
 # sum = z
 # until z > 4000000
-# 	z = x + y
-# 	(z%2 == 0) ? sum = sum + z : sum
-# 	x = y
-# 	y = z
+#   z = x + y
+#   (z%2 == 0) ? sum = sum + z : sum
+#   x = y
+#   y = z
 # end
 
 # puts sum + 2
@@ -46,10 +46,10 @@ puts sum
 ## Answer: 906609
 # largest = 0
 # 999.downto(500).each do |num1|
-# 	num1.downto(500).each do |num2|
-# 		pal = (num1*num2)
-# 		(pal > largest && pal.to_s == pal.to_s.reverse) ? largest = pal : largest
-# 	end
+#   num1.downto(500).each do |num2|
+#     pal = (num1*num2)
+#     (pal > largest && pal.to_s == pal.to_s.reverse) ? largest = pal : largest
+#   end
 # end
 
 # puts "largest palindrome is: #{largest}"
@@ -68,8 +68,8 @@ puts sum
 # sum = 0
 # squares = 0
 # (1..100).each do |i|
-# 	sum += i
-# 	squares += i**2
+#   sum += i
+#   squares += i**2
 # end
 # puts sum
 # puts squares
@@ -83,8 +83,8 @@ puts sum
 ## Method before I learned of ".take":
 # array = []
 # (1..150000).each do |n|
-# 	n.prime? ? array.push(n) : array
-# 	array.length > 10000 ? break : next
+#   n.prime? ? array.push(n) : array
+#   array.length > 10000 ? break : next
 # end
 # puts array.pop
 
@@ -121,17 +121,17 @@ puts sum
 ## and a + b + c = 1000.  Find the values of a,b,c and their product abc.
 ## Answer: 31875000
 # 997.downto(1).each do |a| 
-# 	1.upto(a-1).each do |b|
-# 		c = 1000-a-b
-# 		if a**2 + b**2 == c**2
-# 			puts "a = " + a.to_s
-# 			puts "b = " + b.to_s
-# 			puts "c = " + c.to_s
-# 			puts a*b*c
-# 		else
-# 			next
-# 		end
-# 	end
+#   1.upto(a-1).each do |b|
+#     c = 1000-a-b
+#     if a**2 + b**2 == c**2
+#       puts "a = " + a.to_s
+#       puts "b = " + b.to_s
+#       puts "c = " + c.to_s
+#       puts a*b*c
+#     else
+#       next
+#     end
+#   end
 # end
 
 
@@ -139,7 +139,7 @@ puts sum
 ## Answer: 142913828922
 # require 'prime'
 # puts Prime.take_while {|p| p<2000000}.inject(:+)
-# #Note: a method for giving all primes in a range
+## Note: a method for giving all primes in a range
 # print Prime.take_while {|x| x <= 100 }.drop_while {|x| x < 50 }
 # puts
 
@@ -166,10 +166,10 @@ puts sum
 # end
 
 # until @divisors.length > 500
-# 		i += 1
-# 		sum += i
-# 		@divisors = []
-# 		factors_of(sum)
+#   i += 1
+#   sum += i
+#   @divisors = []
+#   factors_of(sum)
 # end
 # puts sum
 
@@ -190,71 +190,71 @@ puts sum
 ## Below the 'methods' approach (#2) is 25% faster than using the 'Proc' approach (#1 below).
 # require 'benchmark'
 # Benchmark.bm do |bm|
-# 	bm.report("proc:") do
-# 	halves = Proc.new do |n|
-# 		n/2
-# 	end
+#   bm.report("proc:") do
+#   halves = Proc.new do |n|
+#     n/2
+#   end
 
-# 	times = Proc.new do |n|
-# 		3*n + 1
-# 	end
+#   times = Proc.new do |n|
+#     3*n + 1
+#   end
 
-# 	collartz_array = []
-# 	(77000..1000000).each do |n|
-# 		x = n
-# 		array = []
-# 		while n > 1
-# 			if n%2 == 0
-# 				array.push(halves.call(n))
-# 				n = array.last.to_i
-# 			else
-# 				array.push(times.call(n))
-# 				n = array.last.to_i
-# 			end
-# 		end
+#   collartz_array = []
+#   (77000..1000000).each do |n|
+#     x = n
+#     array = []
+#     while n > 1
+#       if n%2 == 0
+#         array.push(halves.call(n))
+#         n = array.last.to_i
+#       else
+#         array.push(times.call(n))
+#         n = array.last.to_i
+#       end
+#     end
 
-# 		if array.length > collartz_array.last.to_i
-# 			collartz_array = []
-# 			collartz_array = collartz_array.push(x)
-# 			collartz_array = collartz_array.push(array.length)
-# 		else
-# 			collartz_array
-# 		end
-# 	end
-# 	puts "#{collartz_array[0]} produces the longest sequence, length: #{collartz_array[1]}"
+#     if array.length > collartz_array.last.to_i
+#       collartz_array = []
+#       collartz_array = collartz_array.push(x)
+#       collartz_array = collartz_array.push(array.length)
+#     else
+#       collartz_array
+#     end
+#   end
+#   puts "#{collartz_array[0]} produces the longest sequence, length: #{collartz_array[1]}"
 # end
 
-# 	bm.report("methods:") do
-# 		def halves(n)
-# 			n/2
-# 		end
+#   bm.report("methods:") do
+#     def halves(n)
+#       n/2
+#     end
 
-# 		def times(n)
-# 			3*n + 1
-# 		end
-# 		collartz_array = []
-# 		(77000..1000000).each do |n|
-# 			x = n
-# 			array = []
-# 			while n > 1
-# 				if n%2 == 0
-# 					array.push(halves(n))
-# 					n = array.last.to_i
-# 				else
-# 					array.push(times(n))
-# 					n = array.last.to_i
-# 				end
-# 			end
+#     def times(n)
+#       3*n + 1
+#     end
+#     collartz_array = []
+#     (77000..1000000).each do |n|
+#       x = n
+#       array = []
+#       while n > 1
+#         if n%2 == 0
+#           array.push(halves(n))
+#           n = array.last.to_i
+#       else
+#         array.push(times(n))
+#           n = array.last.to_i
+#         end
+#       end
 
-# 			if array.length > collartz_array.last.to_i
-# 				collartz_array = []
-# 				collartz_array = collartz_array.push(x, array.length)
-# 			else
-# 				collartz_array
-# 			end
-# 		end
-# 		puts "#{collartz_array[0]} produces the longest sequence, length: #{collartz_array[1]}"
-# 	end
+#       if array.length > collartz_array.last.to_i
+#         collartz_array = []
+#         collartz_array = collartz_array.push(x, array.length)
+#       else
+#         collartz_array
+#       end
+#     end
+#     puts "#{collartz_array[0]} produces the longest sequence, length: #{collartz_array[1]}"
+#   end
 # end
 
 
@@ -263,12 +263,12 @@ puts sum
 
 # @fact = 1
 # def factorial n
-# 	if n >= 2
-# 		@fact = @fact*n
-# 		factorial(n-1)
-# 	else
-# 		@fact
-# 	end
+#   if n >= 2
+#     @fact = @fact*n
+#     factorial(n-1)
+#   else
+#     @fact
+#   end
 # end
 # x = factorial(40)
 # puts x
@@ -299,7 +299,8 @@ puts sum
 ## Answer ?
 
 
-## EULER 19: Counting Sundays - How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+## EULER 19: Counting Sundays - How many Sundays fell on the first of the month during the 
+## twentieth century (1 Jan 1901 to 31 Dec 2000)?
 ## Answer ?
 
 ## EULER 20: Sum the digits of 100!
@@ -307,18 +308,18 @@ puts sum
 # @fact = 1
 # sum = 0
 # def factorial n
-# 	if n >= 2
-# 		@fact = @fact*n
-# 		factorial(n-1)
-# 	else
-# 		@fact
-# 	end
+#   if n >= 2
+#     @fact = @fact*n
+#     factorial(n-1)
+#   else
+#     @fact
+#   end
 # end
 
 # x = factorial(100)
 # string = x.to_s
 # (0...(string.length)).each do |i|
-# 	sum = sum + string[i].to_i
+#   sum = sum + string[i].to_i
 # end
 
 # puts "The sum of the digits of 100! is #{sum}."
@@ -334,16 +335,16 @@ puts sum
 ## Answer: 4782
 # @i = 3
 # def fib (a, b)
-# 	@i += 1
-# 	if b.to_s.length < 1000
-# 		c = b 
-# 		b = a+b
-# 		a = c
-# 		fib(a, b)
-# 	else
-# 		#puts b
-# 		puts "The #{@i}nd term in the Fibonacci sequence contains 1000 digits."
-# 	end
+#   @i += 1
+#   if b.to_s.length < 1000
+#     c = b 
+#     b = a+b
+#     a = c
+#     fib(a, b)
+#   else
+#     #puts b
+#     puts "The #{@i}nd term in the Fibonacci sequence contains 1000 digits."
+#   end
 # end
 
 # fib(2, 3)
