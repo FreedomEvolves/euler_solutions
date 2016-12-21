@@ -1,23 +1,23 @@
 #################
 
-# Problems 1 - 25 from the Project Euler website!
+## Problems 1 - 25 from the Project Euler website:  https://projecteuler.net/archives
+## The wbsite has fuller descriptions of the problems and some of the mathmatical terms used.
 ## Completed problems are hashed out.  Simply unhash them to run the code.
 
 ################
 
 
-
-# Euler 1: Find the sum of all multiples of 3 & 5 below 1000
+# EULER 1: Find the sum of all multiples of 3 & 5 below 1000
 # Answer: 233168
-# sum = 0
-# (1..999).each do |i|
-# 	(i%3 == 0 || i%5 == 0) ? sum = sum + i : sum
-# end
-# puts sum
+sum = 0
+(1..999).each do |i|
+	(i%3 == 0 || i%5 == 0) ? sum = sum + i : sum
+end
+puts sum
 
 
-# Euler 2: Sum the even Fibonacci numbers under 4 million
-# Answer: 4,613,732
+## EULER 2: Sum the even Fibonacci numbers under 4 million
+## Answer: 4,613,732
 # x = 1
 # y = 2
 # z = 0
@@ -32,8 +32,8 @@
 # puts sum + 2
 
 
-# Euler 3: What is the largest prime factor of 600851475143?
-# Answer: 6857
+## EULER 3: What is the largest prime factor of 600851475143?
+## Answer: 6857
 # require 'prime'
 # def factors_of(number)
 #   number.prime_division.map(&:first)
@@ -42,8 +42,8 @@
 # puts factors_of(600851475143).pop
 
 
-# Euler 4: Find the largest palindrome made from the product of two 3-digit numbers.
-# Answer: 906609
+## EULER 4: Find the largest palindrome made from the product of two 3-digit numbers.
+## Answer: 906609
 # largest = 0
 # 999.downto(500).each do |num1|
 # 	num1.downto(500).each do |num2|
@@ -55,16 +55,16 @@
 # puts "largest palindrome is: #{largest}"
 
 
-# Euler 5: What is the smallest positive number that is evenly 
-#   divisible by all of the numbers from 1 to 20?  This is a logic problem.
-# Answer: 232792560
+## EULER 5: What is the smallest positive number that is evenly divisible by 
+## all of the numbers from 1 to 20?  This is a logic problem, not a coding problem.
+## Answer: 232792560
 # x = (2*2*2*2*3*3*5*7)*11*13*17*19  #set in parens gives all other #<20, e.g. 14,18
 # puts x
 
 
-# Euler 6: Find the difference between the sum of the squares of the first 100 integers
-# & the square of the sum.
-# Answer: 25164150
+## EULER 6: Find the difference between the sum of the squares of the first 100 integers
+## & the square of the sum.
+## Answer: 25164150
 # sum = 0
 # squares = 0
 # (1..100).each do |i|
@@ -76,8 +76,8 @@
 # puts "the difference is: #{(sum*sum) - squares}"
 
 
-# Euler 7:  What is the 10 001st prime number? 
-# Answer: 104,743
+## EULER 7:  What is the 10 001st prime number? 
+## Answer: 104,743
 # require 'prime'
 # puts Prime.take(10001).pop
 ## Method before I learned of ".take":
@@ -89,29 +89,35 @@
 # puts array.pop
 
 
-## Euler 8: Find the thirteen adjacent digits in the 1000-digit number that have 
-## the greatest product. What is the value of this product?  Answer: 23514624000
-string = %Q? 73167176531330624919225119674426574742355349194934969835203127745063262395783180169848018694788518438586156078911294949545950 \
-17379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233 \
-80308135336276614282806444486645238749303589072962904915604407723907138105158593079608667017242712188399879790879227492190169972088809377 \
-66572733300105336788122023542180975125454059475224352584907711670556013604839586446706324415722155397536978179778461740649551492908625693 \
-21978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230 \
-86346567481391912316282458617866458359124566529476545682848912883142607690042242190226710556263211111093705442175069416589604080719840385 \
-09624554443629812309878799272442849091888458015616609791913387549920052406368991256071760605886116467109405077541002256983155200055935729 \
-72571636269561882670428252483600823257530420752963450 ?
-products = []
-(0...1000).each do |x|
-  y= x + 12
-  product = 1
-  (x..y).each do |i|
-    product = product * string[i].to_i
-  end
-  products = products.push(product)
-end
-puts products.max
+## EULER 8: Find the thirteen adjacent digits in the 1000-digit number that have 
+## the greatest product. What is the value of this product?  
+## Answer: 23514624000
+# string = %Q? 731671765313306249192251196744265747423553491949349698352031277450632623957831801
+#              698480186947885184385861560789112949495459501737958331952853208805511125406987471
+#              585238630507156932909632952274430435576689664895044524452316173185640309871112172
+#              238311362229893423380308135336276614282806444486645238749303589072962904915604407
+#              723907138105158593079608667017242712188399879790879227492190169972088809377665727
+#              333001053367881220235421809751254540594752243525849077116705560136048395864467063
+#              244157221553975369781797784617406495514929086256932197846862248283972241375657056
+#              057490261407972968652414535100474821663704844031998900088952434506585412275886668
+#              811642717147992444292823086346567481391912316282458617866458359124566529476545682
+#              848912883142607690042242190226710556263211111093705442175069416589604080719840385
+#              096245544436298123098787992724428490918884580156166097919133875499200524063689912
+#              560717606058861164671094050775410022569831552000559357297257163626956188267042825
+#              2483600823257530420752963450 ?
+# products = []
+# (0...1000).each do |x|
+#   y= x + 12
+#   product = 1
+#   (x..y).each do |i|
+#     product = product * string[i].to_i
+#   end
+#   products = products.push(product)
+# end
+# puts products.max
 
 
-## Euler 9: There exists exactly one Pythagorean triplet for which a**2 + b**2 = c**2 
+## EULER 9: There exists exactly one Pythagorean triplet for which a**2 + b**2 = c**2 
 ## and a + b + c = 1000.  Find the values of a,b,c and their product abc.
 ## Answer: 31875000
 # 997.downto(1).each do |a| 
@@ -129,8 +135,8 @@ puts products.max
 # end
 
 
-# Euler 10: Summation of Primes under 2 million
-# Answer: 142913828922
+## EULER 10: Summation of Primes under 2 million
+## Answer: 142913828922
 # require 'prime'
 # puts Prime.take_while {|p| p<2000000}.inject(:+)
 # #Note: a method for giving all primes in a range
@@ -138,13 +144,14 @@ puts products.max
 # puts
 
 
-# Euler 11: Largest product in a 20x20 grid
-# Answer: ?  The data file is 20grid.txt
+## EULER 11: Largest product in a 20x20 grid
+## The data file is 20grid.txt
+## Answer: ?  
 
 
-# Euler 12: What is the value of the first triangle number to have over five hundred divisors?
-# A triangle number is the sum of integers, e.g., the seventh such number is 1+2+3+4+5+6+7 = 28.
-# Answer: 76576500
+## EULER 12: What is the value of the first triangle number to have over five hundred divisors?
+## A triangle number is the sum of integers, e.g., the seventh such number is 1+2+3+4+5+6+7 = 28.
+## Answer: 76576500
 # @divisors = []
 # sum = 1
 # i = 1
@@ -167,8 +174,9 @@ puts products.max
 # puts sum
 
 
-#Euler 13: Large sum: add 100 50-digit numbers, give first 10 digits of result
-# Answer: 5537376230   The data file is big_sum.txt
+## EULER 13: Large sum: add 100 50-digit numbers, give first 10 digits of result.
+## The source data file is big_sum.txt
+## Answer: 5537376230   
 # integer_array = []
 # lines = File.readlines(ARGV.first)
 # array = lines.collect(&:strip)
@@ -177,9 +185,9 @@ puts products.max
 # puts integer_array
 
 
-# Euler 14: Collartz sequences: Which starting number, under one million, produces the longest chain?
-# Answer: 837799, chain length: 524
-# Below the 'methods' approach (#2) is 25% faster than using the 'Proc' approach (#1 below).
+## EULER 14: Collartz sequences: Which starting number, under one million, produces the longest chain?
+## Answer: 837799, chain length: 524
+## Below the 'methods' approach (#2) is 25% faster than using the 'Proc' approach (#1 below).
 # require 'benchmark'
 # Benchmark.bm do |bm|
 # 	bm.report("proc:") do
@@ -250,8 +258,8 @@ puts products.max
 # end
 
 
-# Euler 15: Lattice paths: what is the number of paths through a 20x20 lattice?
-# Answer: 137846528820
+## EULER 15: Lattice paths: what is the number of paths through a 20x20 lattice?
+## Answer: 137846528820
 
 # @fact = 1
 # def factorial n
@@ -271,8 +279,8 @@ puts products.max
 # puts "The number of paths is #{paths}!"
 
 
-# Euler 16: Power digit sum --sum the digits of the number: 2**1000
-# Answer: 1366
+## EULER 16: Power digit sum --sum the digits of the number: 2**1000
+## Answer: 1366
 # sum = 0
 # b = (2**1000).to_s
 # term = b.length-1
@@ -282,12 +290,20 @@ puts products.max
 
 # puts sum
 
-# Euler 17: Number Letter counts - If all the numbers from 1 to 1000 inclusive were written out in words, how many letters would be used?
-# Euler 18: Maximum path sum - Find the maximum sum in a path through a triangle of numbers
-# Euler 19: Counting Sundays - How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+## EULER 17: Number Letter counts - If all the numbers from 1 to 1000 inclusive were 
+## written out in words, how many letters would be used?
+## Answer ?
 
-# Euler 20: Sum the digits of 100!
-# Answer: 648
+
+## EULER 18: Maximum path sum - Find the maximum sum in a path through a triangle of numbers
+## Answer ?
+
+
+## EULER 19: Counting Sundays - How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+## Answer ?
+
+## EULER 20: Sum the digits of 100!
+## Answer: 648
 # @fact = 1
 # sum = 0
 # def factorial n
@@ -307,13 +323,15 @@ puts products.max
 
 # puts "The sum of the digits of 100! is #{sum}."
 
-# Euler 21: Amicable numbers - Evaluate the sum of all the amicable numbers under 10000.
-# Euler 22: Name scores - What is the total of all the name scores in a file of 5000+ first names?
-# Euler 23: Non-abundant sums - Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
-# Euler 24: Lexicographic permutations - What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
+## EULER 21: Amicable numbers - Evaluate the sum of all the amicable numbers under 10000.
+## EULER 22: Name scores - What is the total of all the name scores in a file of 5000+ first names?
+## EULER 23: Non-abundant sums - Find the sum of all the positive integers which cannot be written
+##  as the sum of two abundant numbers.
+## EULER 24: Lexicographic permutations - What is the millionth lexicographic permutation
+## of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
-# Euler 25:  What is the first term in the Fibonacci sequence to contain 1000 digits?
-# Answer: 4782
+## EULER 25:  What is the first term in the Fibonacci sequence to contain 1000 digits?
+## Answer: 4782
 # @i = 3
 # def fib (a, b)
 # 	@i += 1
