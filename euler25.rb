@@ -147,6 +147,118 @@ puts sum
 ## EULER 11: Largest product of four consecutive numbers in a 20x20 grid (horizontal, vertical and both diagonal directions)
 ## The data file is 20grid.txt
 ## Answer: 70600674
+require 'matrix'
+
+def to_a
+  @rows.collect(&:dup)
+end
+
+def row_product(row)
+  largest_prod = 0
+  (0..17).each do |x|
+    prod = row[x].to_i * row[x+1].to_i * row[x+2].to_i * row[x+3].to_i
+    prod > largest_prod ? largest_prod = prod : largest_prod
+  end
+  largest_prod
+end
+
+def vectors(v)
+  diag_vector = []
+  (0..16).each do |i|
+    vector = []
+    (0..19).each do |r|
+      c = r+i
+      v[r,c].nil? ? vector : vector << v[r,c]
+    end
+    diag_vector << vector
+  end
+  diag_vector
+end
+
+def array_vectors(v)
+  diag_vector = []
+  (0..16).each do |i|
+    vector = []
+    (0..19).each do |r|
+      c = r+i
+      v[r][c].nil? ? vector : vector << v[r][c]
+    end
+    diag_vector << vector
+  end
+  diag_vector
+end
+
+###  Read the text file into a matrix ####
+lines = File.readlines(ARGV.first)
+answer = 0
+array = []
+m = Matrix[]
+(0..19).each do |i|
+  array = lines[i].split(" ").map(&:to_i)
+  m = Matrix.rows(m.to_a << array)
+end
+
+### Row products ###
+answer2 = 0
+(0..19).each do |i|
+  largest = row_product(m.row(i))
+  largest > answer2 ? answer2 = largest : answer2
+end
+puts "row answer is #{answer2}"
+
+### Column products ###
+mt = m.transpose
+answer3 = 0
+(0..19).each do |i|
+  largest = row_product(mt.row(i))
+  largest > answer3 ? answer3 = largest : answer3
+end
+puts "col answer is #{answer3}"
+
+### Left to Right diagonals ###
+###  Upper diagonals ###
+cap = vectors(m)
+answer4 = 0
+(0..16).each do |i|
+  largest = row_product(cap[i])
+  largest > answer4 ? answer4 = largest : answer4
+end
+puts "upper_diag answer is #{answer4}"
+### Lower diagonals ###
+cap = vectors(m.transpose)
+answer5 = 0
+(0..16).each do |i|
+  largest = row_product(cap[i])
+  largest > answer5 ? answer5 = largest : answer5
+end
+puts "lower_diag answer is #{answer5}"
+
+### Rotate the Matrix m to prepare for Right to Left diagonals (in the original matrix) ###
+### The resulting object is an Array not a Matrix, so additional work is needed.
+transition = m.to_a
+rotate = []
+
+transition.transpose.each do |x|
+  rotate << x.reverse
+end
+
+## Right to Left diagonals ###
+##  Upper diagonals ###
+pac = array_vectors(rotate)
+answer6 = 0
+(0..16).each do |i|
+  largest = row_product(pac[i])
+  largest > answer6 ? answer6 = largest : answer6
+end
+puts "R2L upper_diag answer is #{answer6}"
+# ### Lower diagonals ###
+pac = array_vectors(rotate.transpose)
+answer7 = 0
+(0..16).each do |i|
+  largest = row_product(pac[i])
+  largest > answer7 ? answer7 = largest : answer7
+end
+puts "R2L lower_diag answer is #{answer7}"
 
 
 ## EULER 12: What is the value of the first triangle number to have over five hundred divisors?
