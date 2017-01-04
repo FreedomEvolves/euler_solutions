@@ -144,9 +144,9 @@ puts sum
 # puts
 
 
-## EULER 11: Largest product in a 20x20 grid
+## EULER 11: Largest product of four consecutive numbers in a 20x20 grid (horizontal, vertical and both diagonal directions)
 ## The data file is 20grid.txt
-## Answer: ?  
+## Answer: 70600674
 
 
 ## EULER 12: What is the value of the first triangle number to have over five hundred divisors?
@@ -176,6 +176,7 @@ puts sum
 
 ## EULER 13: Large sum: add 100 50-digit numbers, give first 10 digits of result.
 ## The source data file is big_sum.txt
+## In Terminal run this file with: ruby euler25.rb big_sum.txt
 ## Answer: 5537376230   
 # integer_array = []
 # lines = File.readlines(ARGV.first)
