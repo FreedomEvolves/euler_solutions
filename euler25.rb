@@ -9,11 +9,11 @@
 
 # EULER 1: Find the sum of all multiples of 3 & 5 below 1000
 # Answer: 233168
-sum = 0
-(1..999).each do |i|
-  (i%3 == 0 || i%5 == 0) ? sum = sum + i : sum
-end
-puts sum
+# sum = 0
+# (1..999).each do |i|
+#   (i%3 == 0 || i%5 == 0) ? sum = sum + i : sum
+# end
+# puts sum
 
 
 ## EULER 2: Sum the even Fibonacci numbers under 4 million
@@ -152,7 +152,7 @@ require 'matrix'
 def to_a
   @rows.collect(&:dup)
 end
-
+# Find the largest product in a row
 def row_product(row)
   largest_prod = 0
   (0..17).each do |x|
@@ -168,20 +168,11 @@ def vectors(v)
     vector = []
     (0..19).each do |r|
       c = r+i
-      v[r,c].nil? ? vector : vector << v[r,c]
-    end
-    diag_vector << vector
-  end
-  diag_vector
-end
-
-def array_vectors(v)
-  diag_vector = []
-  (0..16).each do |i|
-    vector = []
-    (0..19).each do |r|
-      c = r+i
-      v[r][c].nil? ? vector : vector << v[r][c]
+      if v.class == Matrix
+        v[r,c].nil? ? vector : vector << v[r,c]
+      elsif v.class == Array
+        v[r][c].nil? ? vector : vector << v[r][c]
+      end         
     end
     diag_vector << vector
   end
@@ -223,7 +214,7 @@ answer4 = 0
   largest = row_product(cap[i])
   largest > answer4 ? answer4 = largest : answer4
 end
-puts "upper_diag answer is #{answer4}"
+puts "L2R upper_diag answer is #{answer4}"
 ### Lower diagonals ###
 cap = vectors(m.transpose)
 answer5 = 0
@@ -231,7 +222,7 @@ answer5 = 0
   largest = row_product(cap[i])
   largest > answer5 ? answer5 = largest : answer5
 end
-puts "lower_diag answer is #{answer5}"
+puts "L2R lower_diag answer is #{answer5}"
 
 ### Rotate the Matrix m to prepare for Right to Left diagonals (in the original matrix) ###
 ### The resulting object is an Array not a Matrix, so additional work is needed.
@@ -241,10 +232,9 @@ rotate = []
 transition.transpose.each do |x|
   rotate << x.reverse
 end
-
 ## Right to Left diagonals ###
 ##  Upper diagonals ###
-pac = array_vectors(rotate)
+pac = vectors(rotate)
 answer6 = 0
 (0..16).each do |i|
   largest = row_product(pac[i])
@@ -252,7 +242,7 @@ answer6 = 0
 end
 puts "R2L upper_diag answer is #{answer6}"
 # ### Lower diagonals ###
-pac = array_vectors(rotate.transpose)
+pac = vectors(rotate.transpose)
 answer7 = 0
 (0..16).each do |i|
   largest = row_product(pac[i])
