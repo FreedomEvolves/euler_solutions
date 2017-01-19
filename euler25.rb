@@ -145,17 +145,8 @@
 
 
 ## EULER 11: Largest product of four consecutive numbers in a 20x20 grid (horizontal, vertical and both diagonal directions)
-## The data file is 20grid.txt
+## The data file is 20grid.txt  To run the code, type 'ruby euler25.rb 20grid.txt'.
 ## Answer: 70600674
-
-def and_the_answer_is(input, length)
-  answer = 0
-  (0..length).each do |i|
-    largest = row_product(input[i])
-    largest > answer ? answer = largest : answer
-  end
-  answer
-end
 
 # Find the largest product in a row
 def row_product(row)
@@ -167,6 +158,17 @@ def row_product(row)
   largest_prod
 end
 
+# Find the largest product among the rows
+def and_the_answer_is(input, length)
+  answer = 0
+  (0..length).each do |i|
+    largest = row_product(input[i])
+    largest > answer ? answer = largest : answer
+  end
+  answer
+end
+
+# Create the diagonal vectors
 def vectors(v)
   diag_vector = []
   (0..16).each do |i|
@@ -180,7 +182,7 @@ def vectors(v)
   diag_vector
 end
 
-###  Read the text file into a matrix ####
+###  Read the text file into an array ####
 eu_answer = []
 m = []
 array = []
@@ -196,31 +198,31 @@ eu_answer = eu_answer.push(and_the_answer_is(m, 19))
 ### Column products ###
 mt = m.transpose
 eu_answer = eu_answer.push(and_the_answer_is(mt, 19))
+
 ### Left to Right diagonals ###
 ###  Upper diagonals ###
 diag = vectors(m)
 eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
-
 ### Lower diagonals ###
 diag = vectors(m.transpose)
 eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
-### Rotate the Matrix m to prepare for Right to Left diagonals (in the original matrix) ###
-### The resulting object is an Array not a Matrix, so additional work is needed.
 
+### Rotate the Array m to prepare for Right to Left diagonals (in the original array) ###
 rotate = []
 m.transpose.each do |x|
   rotate << x.reverse
 end
+
 ## Right to Left diagonals ###
 ##  Upper diagonals ###
 diag = vectors(rotate)
 eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
-
 # ### Lower diagonals ###
 diag = vectors(rotate.transpose)
 eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
 
 puts "The answer to Problem 11 is: #{eu_answer.sort.pop}"
+
 
 ## EULER 12: What is the value of the first triangle number to have over five hundred divisors?
 ## A triangle number is the sum of integers, e.g., the seventh such number is 1+2+3+4+5+6+7 = 28.
