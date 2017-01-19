@@ -147,6 +147,7 @@
 ## EULER 11: Largest product of four consecutive numbers in a 20x20 grid (horizontal, vertical and both diagonal directions)
 ## The data file is 20grid.txt
 ## Answer: 70600674
+
 def and_the_answer_is(input, length)
   answer = 0
   (0..length).each do |i|
@@ -180,14 +181,13 @@ def vectors(v)
 end
 
 ###  Read the text file into a matrix ####
-lines = File.readlines(ARGV.first)
 eu_answer = []
 m = []
 array = []
-#m = Matrix[]
+
+lines = File.readlines(ARGV.first)
 (0..19).each do |i|
   array = lines[i].split(" ").map(&:to_i)
-  #m = Matrix.rows(m.to_a << array)
   m << array
 end
 
@@ -198,28 +198,27 @@ mt = m.transpose
 eu_answer = eu_answer.push(and_the_answer_is(mt, 19))
 ### Left to Right diagonals ###
 ###  Upper diagonals ###
-cap = vectors(m)
-eu_answer = eu_answer.push(and_the_answer_is(cap, 16))
+diag = vectors(m)
+eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
 
 ### Lower diagonals ###
-cap = vectors(m.transpose)
-eu_answer = eu_answer.push(and_the_answer_is(cap, 16))
+diag = vectors(m.transpose)
+eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
 ### Rotate the Matrix m to prepare for Right to Left diagonals (in the original matrix) ###
 ### The resulting object is an Array not a Matrix, so additional work is needed.
-transition = m.to_a
-rotate = []
 
-transition.transpose.each do |x|
+rotate = []
+m.transpose.each do |x|
   rotate << x.reverse
 end
 ## Right to Left diagonals ###
 ##  Upper diagonals ###
-pac = vectors(rotate)
-eu_answer = eu_answer.push(and_the_answer_is(pac, 16))
+diag = vectors(rotate)
+eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
 
 # ### Lower diagonals ###
-pac = vectors(rotate.transpose)
-eu_answer = eu_answer.push(and_the_answer_is(pac, 16))
+diag = vectors(rotate.transpose)
+eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
 
 puts "The answer to Problem 11 is: #{eu_answer.sort.pop}"
 
