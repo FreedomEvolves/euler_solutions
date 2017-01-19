@@ -147,20 +147,10 @@
 ## EULER 11: Largest product of four consecutive numbers in a 20x20 grid (horizontal, vertical and both diagonal directions)
 ## The data file is 20grid.txt
 ## Answer: 70600674
-require 'matrix'
-
-def to_a
-  @rows.collect(&:dup)
-end
-
 def and_the_answer_is(input, length)
   answer = 0
   (0..length).each do |i|
-    if input.class == Matrix
-      largest = row_product(input.row(i))
-    elsif input.class == Array
-      largest = row_product(input[i])
-    end
+    largest = row_product(input[i])
     largest > answer ? answer = largest : answer
   end
   answer
@@ -182,11 +172,7 @@ def vectors(v)
     vector = []
     (0..19).each do |r|
       c = r+i
-      if v.class == Matrix
-        v[r,c].nil? ? vector : vector << v[r,c]
-      elsif v.class == Array
-        v[r][c].nil? ? vector : vector << v[r][c]
-      end         
+      v[r][c].nil? ? vector : vector << v[r][c]      
     end
     diag_vector << vector
   end
@@ -196,11 +182,13 @@ end
 ###  Read the text file into a matrix ####
 lines = File.readlines(ARGV.first)
 eu_answer = []
+m = []
 array = []
-m = Matrix[]
+#m = Matrix[]
 (0..19).each do |i|
   array = lines[i].split(" ").map(&:to_i)
-  m = Matrix.rows(m.to_a << array)
+  #m = Matrix.rows(m.to_a << array)
+  m << array
 end
 
 ### Row products ###
