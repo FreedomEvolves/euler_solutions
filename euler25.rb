@@ -152,8 +152,8 @@
 def row_product(row)
   largest_prod = 0
   (0..17).each do |x|
-    prod = row[x].to_i * row[x+1].to_i * row[x+2].to_i * row[x+3].to_i
-    prod > largest_prod ? largest_prod = prod : largest_prod
+    product = row[x].to_i * row[x+1].to_i * row[x+2].to_i * row[x+3].to_i
+    product > largest_prod ? largest_prod = product : largest_prod
   end
   largest_prod
 end
@@ -182,44 +182,34 @@ def vectors(v)
   diag_vector
 end
 
-###  Read the text file into an array ####
 eu_answer = []
-m = []
-array = []
-
+row = []
+grid = []
+###  Read the text file into an array ####
 lines = File.readlines(ARGV.first)
 (0..19).each do |i|
-  array = lines[i].split(" ").map(&:to_i)
-  m << array
+  row = lines[i].split(" ").map(&:to_i)
+  grid << row
 end
 
-### Row products ###
-eu_answer = eu_answer.push(and_the_answer_is(m, 19))
-### Column products ###
-mt = m.transpose
-eu_answer = eu_answer.push(and_the_answer_is(mt, 19))
-
-### Left to Right diagonals ###
-###  Upper diagonals ###
-diag = vectors(m)
-eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
-### Lower diagonals ###
-diag = vectors(m.transpose)
-eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
-
-### Rotate the Array m to prepare for Right to Left diagonals (in the original array) ###
-rotate = []
-m.transpose.each do |x|
-  rotate << x.reverse
+grid_col = grid.transpose
+### Left to Right diagonals, u: upper, l: lower ###
+l2r_u = vectors(grid)
+l2r_l = vectors(grid.transpose)
+### Rotate the Array 'grid' to prepare for Right to Left diagonals ###
+rotated = []
+grid.transpose.each do |x|
+  rotated << x.reverse
 end
+r2l_u = vectors(rotated)
+r2l_l = vectors(rotated.transpose)
 
-## Right to Left diagonals ###
-##  Upper diagonals ###
-diag = vectors(rotate)
-eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
-# ### Lower diagonals ###
-diag = vectors(rotate.transpose)
-eu_answer = eu_answer.push(and_the_answer_is(diag, 16))
+eu_answer = eu_answer.push(and_the_answer_is(grid, 19))
+eu_answer = eu_answer.push(and_the_answer_is(grid_col, 19))
+eu_answer = eu_answer.push(and_the_answer_is(l2r_u, 16))
+eu_answer = eu_answer.push(and_the_answer_is(l2r_l, 16))
+eu_answer = eu_answer.push(and_the_answer_is(r2l_u, 16))
+eu_answer = eu_answer.push(and_the_answer_is(r2l_l, 16))
 
 puts "The answer to Problem 11 is: #{eu_answer.sort.pop}"
 
